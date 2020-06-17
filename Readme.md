@@ -18,8 +18,9 @@ reportTime | string  (date-time) | Datetime of the creation of this report (lik
 identificationDate | string (date-time) |  Datetime of the identification process as stated in the original id statement.
 idStatus | string  (enum) | This is the value to indicate the status of the identification process. In case of failure the corresponding reason shall be stated in the idStatement attribute.
 idStatement | string |  This is the error reason or some additional information in case of unknown or success situations. The corresponding message should be human-understandable.
-subjectName | string  | This should be a short link to the subject authenticated. Recommended: name and surname. This field is sensible according to data privacy and should contain just enough data to link to a person.
-contextInformation | string |  The element corresponds to the TransactionContext in BSI TR-03130 which MAY be used to transmit context information like an ID or a hash. To have a link between this identification report and the service for which the identification process was started.
+subjectRef | object  | This should be a short link to the subject authenticated. Currently supported: firstName and lastName. This can easily extended but keep in mind that this field is sensible according to data privacy and should contain just enough data to link to a person.
+contextInformation |array (string) |  The element corresponds to the TransactionContext in BSI TR-03130 which MAY be used to transmit context information. To have a link between this identification report and the service for which the identification process was started.
+documentReferences | array (objects) |  This element can contain references to documents including their hashes. This is an optional attribut since this is not always needed but it can surely be useful.
 loaSent | string (enum) | in eIDAS contexts an id scheme (if it is notified) has a known LoA. When used in a national context only the values from the authority ```bsi.bund.de``` SHALL be used, which correspond to the levels as defined in [TR-03107-1](https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/Publikationen/TechnischeRichtlinien/TR03107/TR-03107-1.pdf). See also [BSI TR-03130](https://www.bsi.bund.de/DE/Publikationen/TechnischeRichtlinien/tr03130/tr-03130.html).
 
 
@@ -34,6 +35,8 @@ The schema can be found in the ```schema``` directory. You will find the JSON We
 }
 ```
 ### Report Sample (as payload for JWT) 
+See also [sample-report](sample/sample-report.json)
+
 ```json
 {
     "reportID": "be4f9806-0b5f-45c3-a008-96fd2750f8cb",
@@ -41,9 +44,13 @@ The schema can be found in the ```schema``` directory. You will find the JSON We
     "reportTime": "2020-06-25T10:20:39+02:00",
     "identificationDate": "2020-06-25T10:19:54+02:00",
     "idStatus": "success",
-    "subjectName": "John Doe",
-    "contextInformation": "Antrag auf Kindergeld: 0815/763763",
+    "subjectRef":  {"firstName": "John","lastName": "Doe" },
+    "contextInformation": ["Antrag auf Kindergeld: 0815/763763"],
     "idStatement": "successful identification sent by SAML-Assertion",
+    "documentReferences":[{
+      "documentName":"test.pdf",
+      "hashAlgo":"SHA-256","digest":"0c2720631b927e25d5cb8b5ca2b9408c552ea76797e3419245931296732fd0d2"
+  }],
     "loaSent": "http://eidas.europa.eu/LoA/low"
   }
 ```

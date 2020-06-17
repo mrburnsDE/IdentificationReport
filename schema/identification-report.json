@@ -12,7 +12,7 @@
         "reportTime",
         "identificationDate",
         "idStatus",
-        "subjectName",
+        "subjectRef",
         "contextInformation",
         "loaSent",
         "idStatement"
@@ -63,7 +63,11 @@
         "idStatus": {
             "$id": "#/properties/idStatus",
             "type": "string",
-            "enum": ["success","failure","unkown"],
+            "enum": [
+                "success",
+                "failure",
+                "unkown"
+            ],
             "title": "Identification Status",
             "description": "This is the value to indicate the status of the identification process. In case of failure the corresponding reason shall be stated in the idStatement attribute",
             "default": "unknown",
@@ -81,24 +85,76 @@
                 "Error: requested LoA could not be found"
             ]
         },
-        "subjectName": {
-            "$id": "#/properties/subjectName",
-            "type": "string",
-            "title": "Subject Name (short)",
-            "description": "This should be a short link to the subject authenticated. Recommended: name and surname",
+        "subjectRef": {
+            "$id": "#/properties/subjectRef",
+            "type": "object",
+            "title": "SubjectRef",
+            "description": "This should be a short link to the subject authenticated. Currently supported: firstName and lastName",
             "default": "",
+            "properties": {
+                "firstName": {
+                    "type": "string",
+                    "description": "The person's first name."
+                },
+                "lastName": {
+                    "type": "string",
+                    "description": "The person's last name."
+                }
+            },
             "examples": [
-                "John Doe"
+                {
+                    "firstName": "John",
+                    "lastName": "Doe"
+                }
             ]
         },
         "contextInformation": {
             "$id": "#/properties/contextInformation",
-            "type": "string",
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
             "title": "Context Information provided by the service",
             "description": "The element corresponds to the TransactionContext in BSI TR-03130 which MAY be used to transmit context information like an ID or a hash. To have a link between this identification report and the service for which the identification process was started",
             "default": "",
             "examples": [
-                "Application ID: XYZ900LKJL"
+                [
+                    "Application ID: XYZ900LKJL"
+                ]
+            ]
+        },
+        "documentReferences": {
+            "$id": "#/properties/documentReferences",
+            "title": "can be used to link specific documents to an identification process",
+            "description": "This element can contain references to documents including their hashes. This is an optional attribut.",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "documentName": {
+                        "type": "string"
+                    },
+                    "hashAlgo": {
+                        "type": "string"
+                    },
+                    "digest": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "documentName",
+                    "hashAlgo",
+                    "digest"
+                ]
+            },
+            "default": "",
+            "examples": [
+                [
+                    {
+                        "documentName":"test.pdf",
+                        "hashAlgo":"SHA-256","digest":"0c2720631b927e25d5cb8b5ca2b9408c552ea76797e3419245931296732fd0d2"
+                    }
+                ]
             ]
         },
         "loaSent": {
