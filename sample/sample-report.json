@@ -1,0 +1,11 @@
+{
+    "reportID": "be4f9806-0b5f-45c3-a008-96fd2750f8cb",
+    "serverIdentity": "https://test.governikus-eid.de/gov_autent/async",
+    "reportTime": "2020-06-25T10:20:39+02:00",
+    "identificationDate": "2020-06-25T10:19:54+02:00",
+    "idStatus": "success",
+    "subjectName": "John Doe",
+    "contextInformation": "Antrag auf Kindergeld: 0815/763763",
+    "idStatement": "successful identification sent by SAML-Assertion",
+    "loaSent": "http://eidas.europa.eu/LoA/low"
+  }
