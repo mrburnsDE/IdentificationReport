@@ -4,6 +4,26 @@ JSON-Schema for a certain kind of payload to JSON Web Token (Signature)
 ## Motivation
 Online identification is a transient process. The corresponding assertions have a short time to live to prevent attacks (e.g. replay attacks). Furthermore assertions and user token are generally encrypted. Therefore it is barely possible to prove a successful identification process later since you cannot use the assertions or user token. 
 Then it is sometimes handy to have a token that proves a successful identification process. This little schema started as a first approach to have such a piece of text. 
+The followig sequence diagram show the idea behind this identification report
+
+```mermaid
+sequenceDiagram
+    participant sp as Service Provider
+    participant eids as eID-Server
+    sp->>eids: Please idenitfy this person, and give me an identification report
+    loop Identification-Process
+        eids->>eids: a lot of redirects will happen here
+    end
+    Note right of eids: Identify alone or use a different idp
+    eids-->>sp: Send personal Data of identified person and identification report
+    rect rgb(100, 100, 150)
+      sp->sp: use personal data for service
+      sp->sp: store identification report as prove (if needed)
+      sp->sp: dismiss assertion from eID-Server
+    end
+    Note right of sp: local handling of personal data on Service Provider side
+    
+```
 
 ## Schema Description
 Some ideas are taken from the XTA2 Service Report [(see "XTA 2 Version 4" here)](https://www.xoev.de/downloads-2316#XTA). Some were results of discussions with the public administration in Germany. 
