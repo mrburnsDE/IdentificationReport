@@ -6,28 +6,7 @@ Online identification is a transient process. The corresponding assertions have 
 Then it is sometimes handy to have a token that proves a successful identification process. This little schema started as a first approach to have such a piece of text. 
 The followig sequence diagram show the idea behind this identification report
 
-[![](https://mermaid.ink/img/eyJjb2RlIjoic2VxdWVuY2VEaWFncmFtXG4gICAgcGFydGljaXBhbnQgc3AgYXMgU2VydmljZSBQcm92aWRlclxuICAgIHBhcnRpY2lwYW50IGVpZHMgYXMgZUlELVNlcnZlclxuICAgIHNwLT4-ZWlkczogUGxlYXNlIGlkZW5pdGZ5IHRoaXMgcGVyc29uLCBhbmQgZ2l2ZSBtZSBhbiBpZGVudGlmaWNhdGlvbiByZXBvcnRcbiAgICBsb29wIElkZW50aWZpY2F0aW9uLVByb2Nlc3NcbiAgICAgICAgZWlkcy0-PmVpZHM6IGEgbG90IG9mIHJlZGlyZWN0cyB3aWxsIGhhcHBlbiBoZXJlXG4gICAgZW5kXG4gICAgTm90ZSByaWdodCBvZiBlaWRzOiBJZGVudGlmeSBhbG9uZSBvciB1c2UgYSBkaWZmZXJlbnQgaWRwXG4gICAgZWlkcy0tPj5zcDogU2VuZCBwZXJzb25hbCBEYXRhIG9mIGlkZW50aWZpZWQgcGVyc29uIGFuZCBpZGVudGlmaWNhdGlvbiByZXBvcnRcbiAgICByZWN0IHJnYigxMDAsIDEwMCwgMTUwKVxuICAgICAgc3AtPnNwOiB1c2UgcGVyc29uYWwgZGF0YSBmb3Igc2VydmljZVxuICAgICAgc3AtPnNwOiBzdG9yZSBpZGVudGlmaWNhdGlvbiByZXBvcnQgYXMgcHJvdmUgKGlmIG5lZWRlZClcbiAgICAgIHNwLT5zcDogZGlzbWlzcyBhc3NlcnRpb24gZnJvbSBlSUQtU2VydmVyXG4gICAgZW5kXG4gICAgTm90ZSByaWdodCBvZiBzcDogbG9jYWwgaGFuZGxpbmcgb2YgcGVyc29uYWwgZGF0YSBvbiBTZXJ2aWNlIFByb3ZpZGVyIHNpZGUiLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9LCJ1cGRhdGVFZGl0b3IiOmZhbHNlfQ)](https://mermaid-js.github.io/mermaid-live-editor/#/edit/eyJjb2RlIjoic2VxdWVuY2VEaWFncmFtXG4gICAgcGFydGljaXBhbnQgc3AgYXMgU2VydmljZSBQcm92aWRlclxuICAgIHBhcnRpY2lwYW50IGVpZHMgYXMgZUlELVNlcnZlclxuICAgIHNwLT4-ZWlkczogUGxlYXNlIGlkZW5pdGZ5IHRoaXMgcGVyc29uLCBhbmQgZ2l2ZSBtZSBhbiBpZGVudGlmaWNhdGlvbiByZXBvcnRcbiAgICBsb29wIElkZW50aWZpY2F0aW9uLVByb2Nlc3NcbiAgICAgICAgZWlkcy0-PmVpZHM6IGEgbG90IG9mIHJlZGlyZWN0cyB3aWxsIGhhcHBlbiBoZXJlXG4gICAgZW5kXG4gICAgTm90ZSByaWdodCBvZiBlaWRzOiBJZGVudGlmeSBhbG9uZSBvciB1c2UgYSBkaWZmZXJlbnQgaWRwXG4gICAgZWlkcy0tPj5zcDogU2VuZCBwZXJzb25hbCBEYXRhIG9mIGlkZW50aWZpZWQgcGVyc29uIGFuZCBpZGVudGlmaWNhdGlvbiByZXBvcnRcbiAgICByZWN0IHJnYigxMDAsIDEwMCwgMTUwKVxuICAgICAgc3AtPnNwOiB1c2UgcGVyc29uYWwgZGF0YSBmb3Igc2VydmljZVxuICAgICAgc3AtPnNwOiBzdG9yZSBpZGVudGlmaWNhdGlvbiByZXBvcnQgYXMgcHJvdmUgKGlmIG5lZWRlZClcbiAgICAgIHNwLT5zcDogZGlzbWlzcyBhc3NlcnRpb24gZnJvbSBlSUQtU2VydmVyXG4gICAgZW5kXG4gICAgTm90ZSByaWdodCBvZiBzcDogbG9jYWwgaGFuZGxpbmcgb2YgcGVyc29uYWwgZGF0YSBvbiBTZXJ2aWNlIFByb3ZpZGVyIHNpZGUiLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9LCJ1cGRhdGVFZGl0b3IiOmZhbHNlfQ)
-
-<!-- 
-  ```mermaid
-  sequenceDiagram
-      participant sp as Service Provider
-      participant eids as eID-Server
-      sp->>eids: Please idenitfy this person, and give me an identification report
-      loop Identification-Process
-          eids->>eids: a lot of redirects will happen here
-      end
-      Note right of eids: Identify alone or use a different idp
-      eids->sp: Send personal Data of identified person and identification report
-      rect rgb(100, 100, 150)
-        sp->sp: use personal data for service
-        sp->sp: store identification report as prove (if needed)
-        sp->sp: dismiss assertion from eID-Server
-      end
-      Note right of sp: local handling of personal data on Service Provider side
-      
-  ```
--->
+![Sample-Sequence](doc/uml/ID-Report-Sequence.png?raw=true "Sample Sequence")
 
 ## Schema Description
 Some ideas are taken from the XTA2 Service Report [(see "XTA 2 Version 4" here)](https://www.xoev.de/downloads-2316#XTA). Some were results of discussions with the public administration in Germany. 
