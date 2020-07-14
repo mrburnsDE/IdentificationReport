@@ -59,7 +59,7 @@ The schema can be found in the ```schema``` directory. You will find the JSON We
 }
 ```
 ### Report Sample (as payload for JWT) 
-See also [sample-report](sample/sample-report.json)
+See also [sample-report](doc/sample/sample-report.json)
 
 ```json
 {
