@@ -66,7 +66,7 @@
             "enum": [
                 "success",
                 "failure",
-                "unkown"
+                "unknown"
             ],
             "title": "Identification Status",
             "description": "This is the value to indicate the status of the identification process. In case of failure the corresponding reason shall be stated in the idStatement attribute",
